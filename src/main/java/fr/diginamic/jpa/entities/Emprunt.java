@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
@@ -80,7 +82,7 @@ public class Emprunt {
 	@Override
 	public String toString() {
 		
-		return "Emprunt date de début : " +date_debut + " Livre :" + livres;
+		return "Emprunt date de début : " + date_debut + " Livre :" + livres;
 	}
 
 }

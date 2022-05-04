@@ -2,8 +2,11 @@ package fr.diginamic.jpa.dao.impl;
 
 import java.util.List;
 
+import javax.persistence.TypedQuery;
+
 import fr.diginamic.jpa.dao.Idao;
 import fr.diginamic.jpa.entities.Client;
+import fr.diginamic.jpa.entities.Emprunt;
 
 public class ClientDao extends Dao implements Idao<Client> {
 
@@ -32,8 +35,9 @@ public class ClientDao extends Dao implements Idao<Client> {
 
 	@Override
 	public Client getOne(Client e) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+			TypedQuery<Client> tqb = fd.getEm().createQuery("select c from Client c where c.id = :id", Client.class);
+			tqb.setParameter("id", e.getId());
+		return tqb.getResultList().get(0);
 	}
 
 	@Override
