@@ -42,5 +42,11 @@ public class Livre {
 	public void setTitre(String titre) {
 		this.titre = titre;
 	}
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "Titre: " + titre;
+	}
 
 }
