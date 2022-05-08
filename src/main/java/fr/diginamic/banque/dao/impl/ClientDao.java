@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import fr.diginamic.banque.dao.Idao;
 import fr.diginamic.banque.entities.Client;
 import fr.diginamic.jpa.dao.impl.FactoryDao;
+import fr.diginamic.jpa.entities.Article;
 
 public class ClientDao extends Dao implements Idao<Client> {
 
@@ -33,8 +34,29 @@ public class ClientDao extends Dao implements Idao<Client> {
 
 	@Override
 	public boolean update(Client e) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+		EntityManager em = null;
+		try {
+			em = fd.getEm();
+			em.getTransaction().begin();
+			Client etrans = em.find(Client.class, e.getId());
+			if (etrans != null) {
+				etrans.setAdresse(e.getAdresse());
+				etrans.setBanque(e.getBanque());
+				etrans.setComptes(e.getComptes());
+				etrans.setDateNaissance(e.getDateNaissance());
+				etrans.setNom(e.getNom());
+				etrans.setPrenom(e.getPrenom());
+				em.merge(etrans);
+				em.getTransaction().commit();
+				return true;
+			}
+			return false;
+
+		} catch (Exception ex) {
+			throw new Exception(ex.getMessage());
+		} finally {
+			fd.close(em);
+		}
 	}
 
 	@Override

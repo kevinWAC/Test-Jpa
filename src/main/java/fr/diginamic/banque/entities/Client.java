@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -31,11 +32,14 @@ public class Client {
 	@JoinColumn(name = "id_banque")
 	private Banque banque;
 
-	@ManyToMany(mappedBy = "clients")
-	private Set<Compte> comptes;
-
+	@ManyToMany
+	@JoinTable(name="client_compte",
+		joinColumns= @JoinColumn(name="id_client", referencedColumnName="id"),
+		inverseJoinColumns= @JoinColumn(name="id_compte", referencedColumnName="id")
+	)
+	private Set<Compte> comptes = new HashSet<>();
+	
 	public Client() {
-		comptes = new HashSet<>();
 	}
 	
 	public Client(String nom, String prenom, LocalDate dateNaissance) {
@@ -43,22 +47,6 @@ public class Client {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.dateNaissance = dateNaissance;
-	}
-
-	public Set<Compte> getComptes() {
-		return comptes;
-	}
-
-	public void setComptes(Set<Compte> comptes) {
-		this.comptes = comptes;
-	}
-
-	public Banque getBanque() {
-		return banque;
-	}
-
-	public void setBanque(Banque banque) {
-		this.banque = banque;
 	}
 
 	public Integer getId() {
@@ -101,4 +89,25 @@ public class Client {
 		this.adresse = adresse;
 	}
 
+	public Banque getBanque() {
+		return banque;
+	}
+
+	public void setBanque(Banque banque) {
+		this.banque = banque;
+	}
+
+	public Set<Compte> getComptes() {
+		return comptes;
+	}
+
+	public void setComptes(Set<Compte> comptes) {
+		this.comptes = comptes;
+	}
+
+	
+	
+
+
+	
 }

@@ -32,6 +32,9 @@
 		<class>fr.diginamic.banque.entities.Client</class>
 		<class>fr.diginamic.banque.entities.Banque</class>
 		<class>fr.diginamic.banque.entities.Adresse</class>
+		<class>fr.diginamic.banque.entities.AssuranceVie</class>
+		<class>fr.diginamic.banque.entities.LivretA</class>
+		<class>fr.diginamic.banque.entities.Virement</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>
 			<!-- desactiver l'autodetection des classes de type @Entity -->

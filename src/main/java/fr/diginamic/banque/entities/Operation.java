@@ -1,8 +1,9 @@
 package fr.diginamic.banque.entities;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,27 +12,36 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
 @Entity
 @Table(name = "operation")
-@Inheritance(strategy = InheritanceType.JOINED)
-
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "TYPE")
 public class Operation {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	private LocalDateTime dat;
+	private LocalDateTime date;
 	private double montant;
 	private String motif;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_compte")
 	private Compte compte;
+	
+	public Operation() {
+	}
+	
+	public Operation(LocalDateTime date, double montant, String motif) {
+		super();
+		this.date = date;
+		this.montant = montant;
+		this.motif = motif;
+	}
 	
 	public Compte getCompte() {
 		return compte;
@@ -45,11 +55,11 @@ public class Operation {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public LocalDateTime getDat() {
-		return dat;
+	public LocalDateTime getDate() {
+		return date;
 	}
-	public void setDat(LocalDateTime dat) {
-		this.dat = dat;
+	public void setDate(LocalDateTime date) {
+		this.date = date;
 	}
 	public double getMontant() {
 		return montant;

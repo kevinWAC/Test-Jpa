@@ -37,19 +37,16 @@ public class BanqueDao extends Dao implements Idao<Banque> {
 
 	@Override
 	public boolean update(Banque e) throws Exception {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean delete(Banque e) throws Exception {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public Banque getOne(Banque e) throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
